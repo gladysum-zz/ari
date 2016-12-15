@@ -2,7 +2,7 @@ import React from 'react';
 import Songs from '../components/Songs';
 
 const Album = (props) => {
-
+console.log(props);
   const album = props.album;
   const currentSong = props.currentSong;
   const isPlaying = props.isPlaying;
