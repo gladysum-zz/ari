@@ -8,6 +8,8 @@ import Albums from '../components/Albums.js';
 import Album from '../components/Album';
 import Sidebar from '../components/Sidebar';
 import Player from '../components/Player';
+import Artist from '../components/Artist';
+import Artists from '../components/Artists';
 
 import { convertAlbum, convertAlbums, skip } from '../utils';
 
@@ -22,18 +24,26 @@ export default class AppContainer extends Component {
     this.next = this.next.bind(this);
     this.prev = this.prev.bind(this);
     this.selectAlbum = this.selectAlbum.bind(this);
-    this.deselectAlbum = this.deselectAlbum.bind(this);
+
   }
 
   componentDidMount () {
     axios.get('/api/albums/')
       .then(res => res.data)
-      .then(album => this.onLoad(convertAlbums(album)));
+      .then(albums => this.onLoad(convertAlbums(albums)));
 
     AUDIO.addEventListener('ended', () =>
       this.next());
     AUDIO.addEventListener('timeupdate', () =>
       this.setProgress(AUDIO.currentTime / AUDIO.duration));
+
+    axios.get('/api/artists')
+    .then(res => res.data)
+    .then(artists => {
+      this.setState({
+        artists: artists
+      })
+    })
   }
 
   onLoad (albums) {
@@ -98,7 +108,49 @@ export default class AppContainer extends Component {
       }));
   }
 
+  selectArtist (artistId){
+    axios.get(`/api/artists/${artistId}`)
+    .then(res => res.data)
+    .then(artist => this.setState({
+      selectedArtist: artist
+    }))
+
+    axios.get(`/api/artists/${artistId}/albums`)
+    .then(res => res.data)
+    .then(albums => this.setState({
+      albums: albums
+    }))
+
+    axios.get(`/api/artists/${artistId}/songs`)
+    .then(res => res.data)
+    .then(songs => this.setState({
+      currentSongList: songs
+    }))
+
+  }
+
+
   render () {
+    const mainView = React.cloneElement(this.props.children, {
+      album: this.state.selectedAlbum,
+      currentSong: this.state.currentSong,
+      isPlaying: this.state.isPlaying,
+      toggleOne:this.toggleOne,
+      albums: this.state.albums,
+      selectAlbum:this.selectAlbum,
+      artists: this.state.artists,
+      selectedArtist: this.state.selectedArtist
+    });
+
+    const playerView = <Player
+          currentSong={this.state.currentSong}
+          currentSongList={this.state.currentSongList}
+          isPlaying={this.state.isPlaying}
+          progress={this.state.progress}
+          next={this.next}
+          prev={this.prev}
+          toggle={this.toggle} />
+
     return (
       <div id="main" className="container-fluid">
         
@@ -107,27 +159,10 @@ export default class AppContainer extends Component {
         </div>
         
         <div className="col-xs-10">
-          {
-            this.props.children ? React.cloneElement(this.props.children, {
-              album: this.state.selectedAlbum,
-              currentSong: this.state.currentSong,
-              isPlaying: this.state.isPlaying,
-              toggleOne:this.toggleOne,
-              albums: this.state.albums,
-              selectAlbum:this.selectAlbum
-            }) : null
-          }
+          {this.props.children ? mainView : null}
         </div>
         
-        <Player
-          currentSong={this.state.currentSong}
-          currentSongList={this.state.currentSongList}
-          isPlaying={this.state.isPlaying}
-          progress={this.state.progress}
-          next={this.next}
-          prev={this.prev}
-          toggle={this.toggle} />
-      
+        {playerView}  
       </div>
     );
   }
