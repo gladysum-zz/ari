@@ -1,15 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ChatContainer from './ChatContainer';
-import ResultContainer from './ResultContainer';
 import RaisedButton from 'material-ui/RaisedButton';
+import ButtonToolbar from 'react-bootstrap';
 import {addInputAction, addResponseAction, outputResultsAction} from './reducer';
+
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      value: ''
+      value: '',
+      option: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -49,6 +50,26 @@ class App extends React.Component {
         </div>
 
         <div className="radio-button-container">
+          <form>
+              <div className="radio">
+                <label>
+                  <input type="radio" value="Google" checked={true} />
+                  Option 1
+                </label>
+              </div>
+              <div className="radio">
+                <label>
+                  <input type="radio" value="IBM Watson Discovery News" />
+                  Option 2
+                </label>
+              </div>
+              <div className="radio">
+                <label>
+                  <input type="radio" value=".edu and .gov only" />
+                  Option 3
+                </label>
+              </div>
+            </form>
         </div>
 
         <div className="result-container">
