@@ -2,18 +2,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 import ButtonToolbar from 'react-bootstrap';
-import {addInputAction, addResponseAction, outputResultsAction} from './reducer';
-
+import {addInputAction, outputResultsAction} from './reducer';
+import Watson from './Watson';
+import Core from './Core';
+import Google from './Google';
+var $ = require('jquery');
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       value: '',
-      option: ''
+      selectedOption: 'option1'
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleOptionChange = this.handleOptionChange.bind(this);
+  }
+
+  handleOptionChange(event) {
+    this.setState({
+      selectedOption: event.target.value
+    });
   }
 
   handleChange(event) {
@@ -28,18 +38,40 @@ class App extends React.Component {
     this.props.addInput(input);
 
     // Send input to backend and update redux store with response
-    axios.post('/', {input: input})
-    .then(res=>res.data)
-    .then(response=>{this.props.outputResults(response)})
-    .catch(error=>{console.log(error)});
-  }
 
+    if(this.state.selectedOption==='option1'){
+      $.ajax({
+        url:'http://sample-env.3vz6vjsbd9.us-east-1.elasticbeanstalk.com/discover?theme='+input,
+        method:'GET'
+      }).done(data => {
+        this.props.outputResults(data.results);
+
+      });
+    }
+
+
+    if(this.state.selectedOption==='option2'){
+      $.ajax({
+        url:'https://ari-academic-research-interface.mybluemix.net/test?theme='+input,
+        method:'GET'
+      }).done(data => this.props.outputResults(data));
+    }
+
+
+    if(this.state.selectedOption==='option3'){
+      $.ajax({
+        url:'https://are-loopback-integration.mybluemix.net/getCustomSearch?theme='+input,
+        method:'GET'
+      }).done(data => this.props.outputResults(data.body.items));
+    }
+  }
 
   componentWillMount() {
     window.scrollTo(0, 0);
   }
 
   render() {
+    let results = this.props.results;
     return (
       <div className="background" id="app">
         <div className="input-container">
@@ -49,30 +81,33 @@ class App extends React.Component {
           </form>
         </div>
 
-        <div className="radio-button-container">
+        <div className="radio-button-container form-group">
           <form>
-              <div className="radio">
+
+              <div className="radio1">
                 <label>
-                  <input type="radio" value="Google" checked={true} />
-                  Option 1
+                  <input type="radio" value="option1" checked={this.state.selectedOption === 'option1'} onChange={this.handleOptionChange} />
+                  IBM Watson Discovery News
                 </label>
               </div>
-              <div className="radio">
+              <div className="radio2">
                 <label>
-                  <input type="radio" value="IBM Watson Discovery News" />
-                  Option 2
+                  <input type="radio" value="option2" checked={this.state.selectedOption === 'option2'} onChange={this.handleOptionChange}/>
+                  Core Academic Search
                 </label>
               </div>
-              <div className="radio">
+              <div className="radio3">
                 <label>
-                  <input type="radio" value=".edu and .gov only" />
-                  Option 3
+                  <input type="radio" value="option3" checked={this.state.selectedOption === 'option3'} onChange={this.handleOptionChange}/>
+                  Google Edu and Gov
                 </label>
               </div>
-            </form>
+
+          </form>
         </div>
 
         <div className="result-container">
+            {this.state.selectedOption === 'option1' ? <Watson results={results} /> : (this.state.selectedOption === 'option2' ? <Core results={results} /> : <Google results={results} /> )}
         </div>
 
       </div>
@@ -81,15 +116,12 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  messages: state.messages
+  results: state.results
 })
 
 const mapDispatchToProps = dispatch => ({
   addInput: input => {
     dispatch(addInputAction(input))
-  },
-  addResponse: response => {
-    dispatch(addResponseAction(response))
   },
   outputResults: results => {
     dispatch(outputResultsAction(results))

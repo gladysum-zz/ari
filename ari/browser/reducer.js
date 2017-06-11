@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const initialState = {
-  messages: [['watson', "Please enter a search term"]],
-  results: ["initial results"]
+  input: '',
+  results: []
 }
 
 
@@ -11,22 +11,15 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch(action.type) {
     case ADD:
-      if (state.messages.length > 100) {
-         return Object.assign({}, state, {
-            messages: state.messages.slice(1).concat(action.payload)
-         })
-      }
-      else {
-        return Object.assign({}, state, {
-          messages: state.messages.concat(action.payload)
-        })
-      }
+      return Object.assign({}, state, {
+        input: action.payload
+      })
 
     case OUTPUT_RESULTS:
-      console.log(action.payload)
+    console.log("this should be the action.payload", action.payload)
       return Object.assign({}, state, {
-              results: action.payload
-            })
+        results: action.payload
+      })
 
     default:
       return state;
@@ -43,11 +36,6 @@ const OUTPUT_RESULTS = 'OUTPUT_RESULTS';
 export const addInputAction = input => ({
   type: ADD,
   payload: [['me', input]]
-})
-
-export const addResponseAction = response => ({
-  type: ADD,
-  payload: [['watson', response]]
 })
 
 export const outputResultsAction = results => ({

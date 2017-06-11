@@ -1,17 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
-import {addInputAction, addResponseAction, outputResultsAction} from './reducer';
+import ButtonToolbar from 'react-bootstrap';
+import {addInputAction, outputResultsAction} from './reducer';
+import Watson from './Watson';
+import Core from './Core';
+import Google from './Google';
+var $ = require('jquery');
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       value: '',
-      option:
+      selectedOption: 'option1'
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleOptionChange = this.handleOptionChange.bind(this);
+  }
+
+  handleOptionChange(event) {
+    this.setState({
+      selectedOption: event.target.value
+    });
   }
 
   handleChange(event) {
@@ -26,10 +38,35 @@ class App extends React.Component {
     this.props.addInput(input);
 
     // Send input to backend and update redux store with response
-    axios.post('/', {input: input})
-    .then(res=>res.data)
-    .then(response=>{this.props.outputResults(response)})
-    .catch(error=>{console.log(error)});
+
+    if(this.state.selectedOption==='option1'){
+      $.ajax({
+        url:'http://sample-env.3vz6vjsbd9.us-east-1.elasticbeanstalk.com/discover?theme='+input,
+        method:'GET'
+      }).done((data)=> console.log(data));
+    }
+
+
+    // if (this.state.selectedOption==='option1') {
+    //   axios.post('/watson', {input: input})
+    //   .then(res=>res.data)
+    //   .then(response=>{this.props.outputResults(response)})
+    //   .catch(error=>{console.log(error)});
+    // }
+
+    // else if (this.state.selectedOption==='option2') {
+    //   axios.post('/core', {input: input})
+    //   .then(res=>res.data)
+    //   .then(response=>{this.props.outputResults(response)})
+    //   .catch(error=>{console.log(error)});
+    // }
+
+    // else if (this.state.selectedOption==='option3') {
+    //   axios.post('/google', {input: input})
+    //   .then(res=>res.data)
+    //   .then(response=>{this.props.outputResults(response)})
+    //   .catch(error=>{console.log(error)});
+    // }
   }
 
 
@@ -38,56 +75,57 @@ class App extends React.Component {
   }
 
   render() {
+    //results = this.props.results;
     return (
-      <div className="background" id="app">
-        <div className="input-container">
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" name="searchAllTerms" value={this.state.value} onChange={this.handleChange} className="input-field" />
-            <RaisedButton type="submit" label="Search" className="search-button"/>
-          </form>
-        </div>
+      // <div className="background" id="app">
+      //   <div className="input-container">
+      //     <form onSubmit={this.handleSubmit}>
+      //       <input type="text" name="searchAllTerms" value={this.state.value} onChange={this.handleChange} className="input-field" />
+      //       <RaisedButton type="submit" label="Search" className="search-button"/>
+      //     </form>
+      //   </div>
 
-        <div className="radio-button-container">
-          <form>
-              <div className="radio">
-                <label>
-                  <input type="radio" value="Google" checked={true} />
-                  Option 1
-                </label>
-              </div>
-              <div className="radio">
-                <label>
-                  <input type="radio" value="IBM Watson Discovery News" />
-                  Option 2
-                </label>
-              </div>
-              <div className="radio">
-                <label>
-                  <input type="radio" value=".edu and .gov only" />
-                  Option 3
-                </label>
-              </div>
-            </form>
-        </div>
+      //   <div className="radio-button-container form-group">
+      //     <form>
 
-        <div className="result-container">
-        </div>
+      //         <div className="radio1">
+      //           <label>
+      //             <input type="radio" value="option1" checked={this.state.selectedOption === 'option1'} onChange={this.handleOptionChange} />
+      //             IBM Watson Discovery News
+      //           </label>
+      //         </div>
+      //         <div className="radio2">
+      //           <label>
+      //             <input type="radio" value="option2" checked={this.state.selectedOption === 'option2'} onChange={this.handleOptionChange}/>
+      //             Core Academic Search
+      //           </label>
+      //         </div>
+      //         <div className="radio3">
+      //           <label>
+      //             <input type="radio" value="option3" checked={this.state.selectedOption === 'option3'} onChange={this.handleOptionChange}/>
+      //             Google Edu and Gov
+      //           </label>
+      //         </div>
 
-      </div>
+      //     </form>
+      //   </div>
+
+      //   <div className="result-container">
+      //     {this.state.selectedOption === 'option1' ? <Watson results={results} /> : (this.state.selectedOption === 'option2' ? <Core results={results} /> : <Google results={results} /> )}
+      //   </div>
+
+      // </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  messages: state.messages
+  results: state.results
 })
 
 const mapDispatchToProps = dispatch => ({
   addInput: input => {
     dispatch(addInputAction(input))
-  },
-  addResponse: response => {
-    dispatch(addResponseAction(response))
   },
   outputResults: results => {
     dispatch(outputResultsAction(results))

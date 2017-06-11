@@ -1,14 +1,11 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
-import Avatar from 'material-ui/Avatar';
 
 export default class ResultList extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
   }
 
   render() {
-    console.log("GLADYS INSIDE RESULT LIST", this.props.results)
     return (
       <div id="result-background">
         <h1 className="results-title"> Results</h1>
