@@ -47,7 +47,6 @@
   background-color: #3EA99F !important;
 }
 
-
 .input-field {
   width: 75%;
   height: 35px;
@@ -79,6 +78,21 @@
   vertical-align: top;
   display:inline-block;
   width: 30%;
+}
+
+.email {
+  text-align: right;
+  padding-right: 100px;
+  margin-top: -40px;
+  padding-bottom: 10px;
+}
+
+.email-button {
+  background-color: #306754 !important;
+  border-radius: 8px !important;
+  color: white !important;
+  text-align: center;
+  z-index: 2;
 }
 
 .link {

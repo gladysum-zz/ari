@@ -30112,10 +30112,16 @@
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
 	    _this.handleChange = _this.handleChange.bind(_this);
 	    _this.handleOptionChange = _this.handleOptionChange.bind(_this);
+	    _this.handleClick = _this.handleClick.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(App, [{
+	    key: 'handleClick',
+	    value: function handleClick() {
+	      window.open("http://dylanch.github.io/ARI/popup", '_blank', 'location=yes,height=400,width=500,scrollbars=no,status=yes');
+	    }
+	  }, {
 	    key: 'handleOptionChange',
 	    value: function handleOptionChange(event) {
 	      this.setState({
@@ -30176,7 +30182,7 @@
 	    key: 'render',
 	    value: function render() {
 	      var results = this.props.results;
-	      return _react2.default.createElement('div', { className: 'background', id: 'app' }, _react2.default.createElement('p', { className: 'app-title' }, 'ARI ', _react2.default.createElement('i', null, 'Academic Research Interface')), _react2.default.createElement('div', { className: 'input-container' }, _react2.default.createElement('form', { onSubmit: this.handleSubmit }, _react2.default.createElement('input', { type: 'text', name: 'searchAllTerms', value: this.state.value, onChange: this.handleChange, className: 'input-field' }), _react2.default.createElement(_RaisedButton2.default, { type: 'submit', label: 'Search', className: 'search-button', primary: true }))), _react2.default.createElement('div', { className: 'radio-button-container form-group' }, _react2.default.createElement('form', { id: 'radio-button' }, _react2.default.createElement('div', { className: 'radio1' }, _react2.default.createElement('label', null, _react2.default.createElement('input', { type: 'radio', value: 'option1', checked: this.state.selectedOption === 'option1', onChange: this.handleOptionChange }), 'IBM Watson Discovery News')), _react2.default.createElement('div', { className: 'radio2' }, _react2.default.createElement('label', null, _react2.default.createElement('input', { type: 'radio', value: 'option2', checked: this.state.selectedOption === 'option2', onChange: this.handleOptionChange }), 'Core Academic Search')), _react2.default.createElement('div', { className: 'radio3' }, _react2.default.createElement('label', null, _react2.default.createElement('input', { type: 'radio', value: 'option3', checked: this.state.selectedOption === 'option3', onChange: this.handleOptionChange }), 'Google Edu and Gov')))), _react2.default.createElement('div', { className: 'result-container' }, this.state.selectedOption === 'option1' ? _react2.default.createElement(_Watson2.default, { results: results }) : this.state.selectedOption === 'option2' ? _react2.default.createElement(_Core2.default, { results: results }) : _react2.default.createElement(_Google2.default, { results: results })));
+	      return _react2.default.createElement('div', { className: 'background', id: 'app' }, _react2.default.createElement('p', { className: 'app-title' }, 'ARI ', _react2.default.createElement('i', null, 'Academic Research Interface')), _react2.default.createElement('div', { className: 'input-container' }, _react2.default.createElement('form', { onSubmit: this.handleSubmit }, _react2.default.createElement('input', { type: 'text', name: 'searchAllTerms', value: this.state.value, onChange: this.handleChange, className: 'input-field' }), _react2.default.createElement(_RaisedButton2.default, { type: 'submit', label: 'Search', className: 'search-button', primary: true }))), _react2.default.createElement('div', { className: 'radio-button-container form-group' }, _react2.default.createElement('form', { id: 'radio-button' }, _react2.default.createElement('div', { className: 'radio1' }, _react2.default.createElement('label', null, _react2.default.createElement('input', { type: 'radio', value: 'option1', checked: this.state.selectedOption === 'option1', onChange: this.handleOptionChange }), 'IBM Watson Discovery News')), _react2.default.createElement('div', { className: 'radio2' }, _react2.default.createElement('label', null, _react2.default.createElement('input', { type: 'radio', value: 'option2', checked: this.state.selectedOption === 'option2', onChange: this.handleOptionChange }), 'Core Academic Search')), _react2.default.createElement('div', { className: 'radio3' }, _react2.default.createElement('label', null, _react2.default.createElement('input', { type: 'radio', value: 'option3', checked: this.state.selectedOption === 'option3', onChange: this.handleOptionChange }), 'Google Edu and Gov')))), _react2.default.createElement('div', { className: 'email' }, _react2.default.createElement('button', { onClick: this.handleClick }, 'Email Results')), _react2.default.createElement('div', { className: 'result-container' }, this.state.selectedOption === 'option1' ? _react2.default.createElement(_Watson2.default, { results: results }) : this.state.selectedOption === 'option2' ? _react2.default.createElement(_Core2.default, { results: results }) : _react2.default.createElement(_Google2.default, { results: results })));
 	    }
 	  }]);
 	

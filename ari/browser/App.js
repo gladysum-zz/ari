@@ -17,6 +17,11 @@ class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleOptionChange = this.handleOptionChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    window.open("http://dylanch.github.io/ARI/popup", '_blank', 'location=yes,height=400,width=500,scrollbars=no,status=yes')
   }
 
   handleOptionChange(event) {
@@ -100,6 +105,10 @@ class App extends React.Component {
               </div>
 
           </form>
+        </div>
+
+        <div className="email">
+          <button onClick={this.handleClick}>Email Results</button>
         </div>
 
         <div className="result-container">
