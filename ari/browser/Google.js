@@ -19,7 +19,7 @@ export default class Google extends React.Component {
 
 
             </div>
-          )}) : <div className="no-results">No results found.</div>}
+          )}) : null}
         </ul>
       </div>
     )

@@ -24,7 +24,7 @@ export default class Core extends React.Component {
               </p>
 
             </div>
-          )}) : <div className="no-results">No results found.</div>}
+          )}) : null}
         </ul>
       </div>
     )

@@ -36735,7 +36735,7 @@
 	    value: function render() {
 	      return _react2.default.createElement("div", { id: "result-background" }, _react2.default.createElement("ul", { id: "result-list" }, this.props.results ? this.props.results.map(function (result, index) {
 	        return _react2.default.createElement("div", { key: index }, _react2.default.createElement("p", { className: "article-title" }, result.title), _react2.default.createElement("p", { className: "article-summary" }, result.datePublished), _react2.default.createElement("p", { className: "article-summary" }, result.description));
-	      }) : _react2.default.createElement("div", { className: "no-results" }, "No results found.")));
+	      }) : null));
 	    }
 	  }]);
 	
@@ -36806,7 +36806,7 @@
 	    value: function render() {
 	      return _react2.default.createElement("div", { id: "result-background" }, _react2.default.createElement("ul", { id: "result-list" }, this.props.results ? this.props.results.map(function (result, index) {
 	        return _react2.default.createElement("div", { key: index }, _react2.default.createElement("p", { className: "article-title" }, result.title));
-	      }) : _react2.default.createElement("div", { className: "no-results" }, "No results found.")));
+	      }) : null));
 	    }
 	  }]);
 	

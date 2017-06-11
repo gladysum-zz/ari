@@ -12,7 +12,7 @@
 
 .app-title {
   color: #FFFFCC;
-  padding: 20px 0 0 60px;
+  padding: 20px 0 0 80px;
   font-size: 30px;
   font-weight: bold;
 }
@@ -20,18 +20,18 @@
 .input-container {
   margin-top: -20px;
   height: 80px;
-  padding-left: 20px;
+  padding-left: 40px;
 }
 
 .radio-button-container {
   height: 45px;
-  padding-left: 65px;
+  padding-left: 85px;
   padding-top: 10px;
 }
 
 .result-container {
   background-color: white;
-  padding: 20px 0 20px 30px;
+  padding: 20px 100px 20px 30px;
   color: #404040;
 }
 
@@ -89,7 +89,7 @@
 }
 
 .article-summary {
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .similar-article {
