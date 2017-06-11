@@ -8,7 +8,6 @@ export default class Watson extends React.Component {
   render() {
     return (
       <div id="result-background">
-        <h1 className="results-title"> Results</h1>
         <ul id="result-list">
           {this.props.results ? this.props.results.map((result, index) => {return (
             <div key={index}>

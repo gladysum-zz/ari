@@ -1,30 +1,38 @@
 @import url('https://fonts.googleapis.com/css?family=Lato');
 
 #app {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Arial', sans-serif;
 }
 
 .background {
   padding-top: 15px;
   margin: -2% -1% -1% -1%;
-  background-color: #4EE2EC;
+  background-color: #43BFC7;
+}
+
+.app-title {
+  color: #FFFFC2;
+  padding: 20px 0 0 60px;
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .input-container {
+  margin-top: -20px;
   height: 80px;
-
+  padding-left: 20px;
 }
 
 .radio-button-container {
   height: 45px;
-
-  padding-left: 50px;
-
-
+  padding-left: 65px;
+  padding-top: 10px;
 }
 
 .result-container {
-
+  background-color: white;
+  padding: 20px 0 20px 30px;
+  color: #404040;
 }
 
 .search-button {
@@ -32,8 +40,6 @@
   border-radius: 8px !important;
   color: white !important;
   text-align: center;
-
-
 }
 
 .input-field {
@@ -44,25 +50,28 @@
   color: black;
 }
 
+#radio-button {
+  color: #FFFFC2;
+  font-size: 20px;
+  text-shadow: 2px 2px 4px #000000;
+}
+
 .radio1 {
   vertical-align: top;
   display:inline-block;
   width: 30%;
-
 }
 
 .radio2 {
   vertical-align: top;
   display:inline-block;
   width: 30%;
-
 }
 
 .radio3 {
   vertical-align: top;
   display:inline-block;
   width: 30%;
-
 }
 
 .link {

@@ -16,7 +16,6 @@ const reducer = (state = initialState, action) => {
       })
 
     case OUTPUT_RESULTS:
-    console.log("this should be the action.payload", action.payload)
       return Object.assign({}, state, {
         results: action.payload
       })

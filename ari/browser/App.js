@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
-import ButtonToolbar from 'react-bootstrap';
 import {addInputAction, outputResultsAction} from './reducer';
 import Watson from './Watson';
 import Core from './Core';
@@ -37,18 +36,14 @@ class App extends React.Component {
     // Update the redux store with user's input
     this.props.addInput(input);
 
-    // Send input to backend and update redux store with response
+    // Send input to API and update redux store with response
 
     if(this.state.selectedOption==='option1'){
       $.ajax({
         url:'http://sample-env.3vz6vjsbd9.us-east-1.elasticbeanstalk.com/discover?theme='+input,
         method:'GET'
-      }).done(data => {
-        this.props.outputResults(data.results);
-
-      });
+      }).done(data => this.props.outputResults(data.results));
     }
-
 
     if(this.state.selectedOption==='option2'){
       $.ajax({
@@ -56,7 +51,6 @@ class App extends React.Component {
         method:'GET'
       }).done(data => this.props.outputResults(data));
     }
-
 
     if(this.state.selectedOption==='option3'){
       $.ajax({
@@ -74,6 +68,9 @@ class App extends React.Component {
     let results = this.props.results;
     return (
       <div className="background" id="app">
+        <p className="app-title">
+          ARI <i>Academic Research Interface</i>
+        </p>
         <div className="input-container">
           <form onSubmit={this.handleSubmit}>
             <input type="text" name="searchAllTerms" value={this.state.value} onChange={this.handleChange} className="input-field" />
@@ -82,8 +79,7 @@ class App extends React.Component {
         </div>
 
         <div className="radio-button-container form-group">
-          <form>
-
+          <form id="radio-button">
               <div className="radio1">
                 <label>
                   <input type="radio" value="option1" checked={this.state.selectedOption === 'option1'} onChange={this.handleOptionChange} />
