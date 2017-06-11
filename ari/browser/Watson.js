@@ -12,16 +12,13 @@ export default class Watson extends React.Component {
           {this.props.results ? this.props.results.map((result, index) => {return (
             <div key={index}>
 
-              <p className="article-title">
+              <a href={result.url} target="_blank" className="article-title">
                 {result.title}
+              </a>
+
+              <p>
+                {result.yyyymmdd ? result.yyyymmdd.slice(0,4)+'-'+result.yyyymmdd.slice(4,6)+'-'+result.yyyymmdd.slice(6,8):null}
               </p>
-
-
-              <p className="article-summary">
-                {result.author}
-              </p>
-
-
 
             </div>
           )}) : null}

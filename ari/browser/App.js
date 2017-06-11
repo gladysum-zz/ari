@@ -74,7 +74,7 @@ class App extends React.Component {
         <div className="input-container">
           <form onSubmit={this.handleSubmit}>
             <input type="text" name="searchAllTerms" value={this.state.value} onChange={this.handleChange} className="input-field" />
-            <RaisedButton type="submit" label="Search" className="search-button"/>
+            <RaisedButton type="submit" label="Search" className="search-button" primary={true}/>
           </form>
         </div>
 

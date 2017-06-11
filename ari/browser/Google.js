@@ -12,8 +12,12 @@ export default class Google extends React.Component {
           {this.props.results ? this.props.results.map((result, index) => {return (
             <div key={index}>
 
-              <p className="article-title">
+              <a href={result.link} target="_blank" className="article-title">
                 {result.title}
+              </a>
+
+              <p>
+                {result.snippet}
               </p>
 
 

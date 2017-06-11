@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Lato');
 
 #app {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 .background {
   padding-top: 15px;
   margin: -2% -1% -1% -1%;
-  background-color: #43BFC7;
+  background-color: #58b792;
 }
 
 .app-title {
-  color: #FFFFCC;
+  color: white;
   padding: 20px 0 0 80px;
   font-size: 30px;
   font-weight: bold;
@@ -36,11 +36,17 @@
 }
 
 .search-button {
-  background-color: #7BCCB5 !important;
+  background-color: #306754 !important;
   border-radius: 8px !important;
   color: white !important;
   text-align: center;
+  z-index: 2;
 }
+
+.search-button:hover {
+  background-color: #3EA99F !important;
+}
+
 
 .input-field {
   width: 75%;
@@ -52,9 +58,9 @@
 }
 
 #radio-button {
-  color: #FFFFCC;
+  color: white;
   font-size: 20px;
-  text-shadow: 2px 2px 4px #000000;
+  font-weight: bold;
 }
 
 .radio1 {
@@ -80,7 +86,7 @@
 }
 
 .article-title {
-  font-size: 20px;
+  font-size: 18px;
   font-weight:bold;
 }
 
@@ -90,6 +96,11 @@
 
 .article-summary {
   font-size: 16px;
+}
+
+.full-text {
+  line-height: .1em;
+  margin-top: -5px;
 }
 
 .similar-article {
@@ -112,4 +123,20 @@
 .no-results {
   font-size: 16px;
   text-align: center;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
 }
