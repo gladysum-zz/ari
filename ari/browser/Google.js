@@ -20,8 +20,6 @@ export default class Google extends React.Component {
                 {result.snippet}
               </p>
 
-
-
             </div>
           )}) : null}
         </ul>
