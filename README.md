@@ -19,7 +19,7 @@ We built a unique product that is valuable for government intelligence analysts,
 ## What we learned
 We learned how to integrate a variety of APIs and technologies, including IBM Watson Discovery News API, Core API, Google Custom Search API, LoopBack, AWS, and Bluemix.
 
-## What's next for ARI (Academic Research Interface)
+## What's next for ARI
 Add data visualization for sentiment analysis and allow the user to study an issue from different sides of the political spectrum. 
 
 
