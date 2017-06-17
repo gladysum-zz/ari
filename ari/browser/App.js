@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
-import {addInputAction, outputResultsAction} from './reducer';
+import {addInputAction, outputResultsActionCore, outputResultsActionGoogle, outputResultsActionWatson} from './reducer';
 import Watson from './Watson';
 import Core from './Core';
 import Google from './Google';
@@ -47,21 +47,21 @@ class App extends React.Component {
       $.ajax({
         url:'http://sample-env.3vz6vjsbd9.us-east-1.elasticbeanstalk.com/discover?theme='+input,
         method:'GET'
-      }).done(data => this.props.outputResults(data.results));
+      }).done(data => this.props.outputResultsWatson(data.results));
     }
 
     if(this.state.selectedOption==='option2'){
       $.ajax({
         url:'https://ari-academic-research-interface.mybluemix.net/test?theme='+input,
         method:'GET'
-      }).done(data => this.props.outputResults(data));
+      }).done(data => this.props.outputResultsCore(data));
     }
 
     if(this.state.selectedOption==='option3'){
       $.ajax({
         url:'https://are-loopback-integration.mybluemix.net/getCustomSearch?theme='+input,
         method:'GET'
-      }).done(data => this.props.outputResults(data.body.items));
+      }).done(data => this.props.outputResultsGoogle(data.body.items));
     }
   }
 
@@ -70,7 +70,9 @@ class App extends React.Component {
   }
 
   render() {
-    let results = this.props.results;
+    let resultsCore = this.props.resultsCore;
+    let resultsGoogle = this.props.resultsGoogle;
+    let resultsWatson = this.props.resultsWatson;
     return (
       <div className="background" id="app">
         <p className="app-title">
@@ -112,7 +114,7 @@ class App extends React.Component {
         </div>
 
         <div className="result-container">
-            {this.state.selectedOption === 'option1' ? <Watson results={results} /> : (this.state.selectedOption === 'option2' ? <Core results={results} /> : <Google results={results} /> )}
+            {this.state.selectedOption === 'option1' ? <Watson results={resultsWatson} /> : (this.state.selectedOption === 'option2' ? <Core results={resultsCore} /> : <Google results={resultsGoogle} /> )}
         </div>
 
       </div>
@@ -121,15 +123,23 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  results: state.results
+  resultsCore: state.resultsCore,
+  resultsGoogle: state.resultsGoogle,
+  resultsWatson: state.resultsWatson,
 })
 
 const mapDispatchToProps = dispatch => ({
   addInput: input => {
     dispatch(addInputAction(input))
   },
-  outputResults: results => {
-    dispatch(outputResultsAction(results))
+  outputResultsCore: results => {
+    dispatch(outputResultsActionCore(results))
+  },
+  outputResultsGoogle: results => {
+    dispatch(outputResultsActionGoogle(results))
+  },
+  outputResultsWatson: results => {
+    dispatch(outputResultsActionWatson(results))
   }
 })
 

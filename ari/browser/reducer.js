@@ -2,7 +2,9 @@ import axios from 'axios'
 
 const initialState = {
   input: '',
-  results: []
+  resultsCore: [],
+  resultsGoogle: [],
+  resultsWatson: []
 }
 
 
@@ -15,9 +17,19 @@ const reducer = (state = initialState, action) => {
         input: action.payload
       })
 
-    case OUTPUT_RESULTS:
+    case OUTPUT_RESULTS_CORE:
       return Object.assign({}, state, {
-        results: action.payload
+        resultsCore: action.payload
+      })
+
+    case OUTPUT_RESULTS_GOOGLE:
+      return Object.assign({}, state, {
+        resultsGoogle: action.payload
+      })
+
+    case OUTPUT_RESULTS_WATSON:
+      return Object.assign({}, state, {
+        resultsWatson: action.payload
       })
 
     default:
@@ -28,7 +40,10 @@ const reducer = (state = initialState, action) => {
 /* ----------------- ACTIONS ------------------ */
 
 const ADD = 'ADD';
-const OUTPUT_RESULTS = 'OUTPUT_RESULTS';
+const OUTPUT_RESULTS_CORE = 'OUTPUT_RESULTS_CORE';
+const OUTPUT_RESULTS_WATSON = 'OUTPUT_RESULTS_WATSON';
+const OUTPUT_RESULTS_GOOGLE = 'OUTPUT_RESULTS_GOOGLE';
+
 
 /* ------------ ACTION CREATORS ------------------ */
 
@@ -37,8 +52,18 @@ export const addInputAction = input => ({
   payload: [['me', input]]
 })
 
-export const outputResultsAction = results => ({
-  type: OUTPUT_RESULTS,
+export const outputResultsActionCore = results => ({
+  type: OUTPUT_RESULTS_CORE,
+  payload: results
+})
+
+export const outputResultsActionGoogle = results => ({
+  type: OUTPUT_RESULTS_GOOGLE,
+  payload: results
+})
+
+export const outputResultsActionWatson = results => ({
+  type: OUTPUT_RESULTS_WATSON,
   payload: results
 })
 

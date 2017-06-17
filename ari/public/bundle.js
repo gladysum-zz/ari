@@ -30151,7 +30151,7 @@
 	          url: 'http://sample-env.3vz6vjsbd9.us-east-1.elasticbeanstalk.com/discover?theme=' + input,
 	          method: 'GET'
 	        }).done(function (data) {
-	          return _this2.props.outputResults(data.results);
+	          return _this2.props.outputResultsWatson(data.results);
 	        });
 	      }
 	
@@ -30160,7 +30160,7 @@
 	          url: 'https://ari-academic-research-interface.mybluemix.net/test?theme=' + input,
 	          method: 'GET'
 	        }).done(function (data) {
-	          return _this2.props.outputResults(data);
+	          return _this2.props.outputResultsCore(data);
 	        });
 	      }
 	
@@ -30169,7 +30169,7 @@
 	          url: 'https://are-loopback-integration.mybluemix.net/getCustomSearch?theme=' + input,
 	          method: 'GET'
 	        }).done(function (data) {
-	          return _this2.props.outputResults(data.body.items);
+	          return _this2.props.outputResultsGoogle(data.body.items);
 	        });
 	      }
 	    }
@@ -30181,8 +30181,10 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var results = this.props.results;
-	      return _react2.default.createElement('div', { className: 'background', id: 'app' }, _react2.default.createElement('p', { className: 'app-title' }, 'ARI ', _react2.default.createElement('i', null, 'Academic Research Interface')), _react2.default.createElement('div', { className: 'input-container' }, _react2.default.createElement('form', { onSubmit: this.handleSubmit }, _react2.default.createElement('input', { type: 'text', name: 'searchAllTerms', value: this.state.value, onChange: this.handleChange, className: 'input-field' }), _react2.default.createElement(_RaisedButton2.default, { type: 'submit', label: 'Search', className: 'search-button', primary: true }))), _react2.default.createElement('div', { className: 'radio-button-container form-group' }, _react2.default.createElement('form', { id: 'radio-button' }, _react2.default.createElement('div', { className: 'radio1' }, _react2.default.createElement('label', null, _react2.default.createElement('input', { type: 'radio', value: 'option1', checked: this.state.selectedOption === 'option1', onChange: this.handleOptionChange }), 'IBM Watson Discovery News')), _react2.default.createElement('div', { className: 'radio2' }, _react2.default.createElement('label', null, _react2.default.createElement('input', { type: 'radio', value: 'option2', checked: this.state.selectedOption === 'option2', onChange: this.handleOptionChange }), 'Core Academic Search')), _react2.default.createElement('div', { className: 'radio3' }, _react2.default.createElement('label', null, _react2.default.createElement('input', { type: 'radio', value: 'option3', checked: this.state.selectedOption === 'option3', onChange: this.handleOptionChange }), 'Google Edu and Gov')))), _react2.default.createElement('div', { className: 'email' }, _react2.default.createElement('button', { onClick: this.handleClick }, 'Email Results')), _react2.default.createElement('div', { className: 'result-container' }, this.state.selectedOption === 'option1' ? _react2.default.createElement(_Watson2.default, { results: results }) : this.state.selectedOption === 'option2' ? _react2.default.createElement(_Core2.default, { results: results }) : _react2.default.createElement(_Google2.default, { results: results })));
+	      var resultsCore = this.props.resultsCore;
+	      var resultsGoogle = this.props.resultsGoogle;
+	      var resultsWatson = this.props.resultsWatson;
+	      return _react2.default.createElement('div', { className: 'background', id: 'app' }, _react2.default.createElement('p', { className: 'app-title' }, 'ARI ', _react2.default.createElement('i', null, 'Academic Research Interface')), _react2.default.createElement('div', { className: 'input-container' }, _react2.default.createElement('form', { onSubmit: this.handleSubmit }, _react2.default.createElement('input', { type: 'text', name: 'searchAllTerms', value: this.state.value, onChange: this.handleChange, className: 'input-field' }), _react2.default.createElement(_RaisedButton2.default, { type: 'submit', label: 'Search', className: 'search-button', primary: true }))), _react2.default.createElement('div', { className: 'radio-button-container form-group' }, _react2.default.createElement('form', { id: 'radio-button' }, _react2.default.createElement('div', { className: 'radio1' }, _react2.default.createElement('label', null, _react2.default.createElement('input', { type: 'radio', value: 'option1', checked: this.state.selectedOption === 'option1', onChange: this.handleOptionChange }), 'IBM Watson Discovery News')), _react2.default.createElement('div', { className: 'radio2' }, _react2.default.createElement('label', null, _react2.default.createElement('input', { type: 'radio', value: 'option2', checked: this.state.selectedOption === 'option2', onChange: this.handleOptionChange }), 'Core Academic Search')), _react2.default.createElement('div', { className: 'radio3' }, _react2.default.createElement('label', null, _react2.default.createElement('input', { type: 'radio', value: 'option3', checked: this.state.selectedOption === 'option3', onChange: this.handleOptionChange }), 'Google Edu and Gov')))), _react2.default.createElement('div', { className: 'email' }, _react2.default.createElement('button', { onClick: this.handleClick }, 'Email Results')), _react2.default.createElement('div', { className: 'result-container' }, this.state.selectedOption === 'option1' ? _react2.default.createElement(_Watson2.default, { results: resultsWatson }) : this.state.selectedOption === 'option2' ? _react2.default.createElement(_Core2.default, { results: resultsCore }) : _react2.default.createElement(_Google2.default, { results: resultsGoogle })));
 	    }
 	  }]);
 	
@@ -30191,7 +30193,9 @@
 	
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    results: state.results
+	    resultsCore: state.resultsCore,
+	    resultsGoogle: state.resultsGoogle,
+	    resultsWatson: state.resultsWatson
 	  };
 	};
 	
@@ -30200,8 +30204,14 @@
 	    addInput: function addInput(input) {
 	      dispatch((0, _reducer.addInputAction)(input));
 	    },
-	    outputResults: function outputResults(results) {
-	      dispatch((0, _reducer.outputResultsAction)(results));
+	    outputResultsCore: function outputResultsCore(results) {
+	      dispatch((0, _reducer.outputResultsActionCore)(results));
+	    },
+	    outputResultsGoogle: function outputResultsGoogle(results) {
+	      dispatch((0, _reducer.outputResultsActionGoogle)(results));
+	    },
+	    outputResultsWatson: function outputResultsWatson(results) {
+	      dispatch((0, _reducer.outputResultsActionWatson)(results));
 	    }
 	  };
 	};
@@ -33377,7 +33387,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.outputResultsAction = exports.addInputAction = undefined;
+	exports.outputResultsActionWatson = exports.outputResultsActionGoogle = exports.outputResultsActionCore = exports.addInputAction = undefined;
 	
 	var _axios = __webpack_require__(384);
 	
@@ -33389,7 +33399,9 @@
 	
 	var initialState = {
 	  input: '',
-	  results: []
+	  resultsCore: [],
+	  resultsGoogle: [],
+	  resultsWatson: []
 	
 	  /* ------------ REDUCER ------------------ */
 	
@@ -33403,9 +33415,19 @@
 	        input: action.payload
 	      });
 	
-	    case OUTPUT_RESULTS:
+	    case OUTPUT_RESULTS_CORE:
 	      return Object.assign({}, state, {
-	        results: action.payload
+	        resultsCore: action.payload
+	      });
+	
+	    case OUTPUT_RESULTS_GOOGLE:
+	      return Object.assign({}, state, {
+	        resultsGoogle: action.payload
+	      });
+	
+	    case OUTPUT_RESULTS_WATSON:
+	      return Object.assign({}, state, {
+	        resultsWatson: action.payload
 	      });
 	
 	    default:
@@ -33416,7 +33438,9 @@
 	/* ----------------- ACTIONS ------------------ */
 	
 	var ADD = 'ADD';
-	var OUTPUT_RESULTS = 'OUTPUT_RESULTS';
+	var OUTPUT_RESULTS_CORE = 'OUTPUT_RESULTS_CORE';
+	var OUTPUT_RESULTS_WATSON = 'OUTPUT_RESULTS_WATSON';
+	var OUTPUT_RESULTS_GOOGLE = 'OUTPUT_RESULTS_GOOGLE';
 	
 	/* ------------ ACTION CREATORS ------------------ */
 	
@@ -33427,9 +33451,23 @@
 	  };
 	};
 	
-	var outputResultsAction = exports.outputResultsAction = function outputResultsAction(results) {
+	var outputResultsActionCore = exports.outputResultsActionCore = function outputResultsActionCore(results) {
 	  return {
-	    type: OUTPUT_RESULTS,
+	    type: OUTPUT_RESULTS_CORE,
+	    payload: results
+	  };
+	};
+	
+	var outputResultsActionGoogle = exports.outputResultsActionGoogle = function outputResultsActionGoogle(results) {
+	  return {
+	    type: OUTPUT_RESULTS_GOOGLE,
+	    payload: results
+	  };
+	};
+	
+	var outputResultsActionWatson = exports.outputResultsActionWatson = function outputResultsActionWatson(results) {
+	  return {
+	    type: OUTPUT_RESULTS_WATSON,
 	    payload: results
 	  };
 	};
