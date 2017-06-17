@@ -7,9 +7,6 @@ ARI is a research application for government intelligence analysts, scholars, an
 ## Inspiration
 We were inspired by the GovTech Alliance's "Technologies to Counter Extremism" challenge. Our idea was to create a technological solution to the problem of combatting violent extremism. ARI contributes to this goal by helping key stakeholders understand a complex problem from different angles.
 
-## What it does
-ARI is a research application for government intelligence analysts, scholars, and students. It lets you study a topic from three different perspectives by entering your search term and selecting from different data source options: IBM Watson Discovery News for the journalistic perspective, Core for the scholarly perspective, and Google Edu and Gov for the perspective of elite educational and government institutions. 
-
 ## How we built it
 We built the ARI application using JavaScript, Node, Express, React, React-Redux, HTML, and CSS. We built the APIs that provide the data using IBM Watson Discovery News API, Core API, Google Custom Search API, LoopBack, AWS, and Bluemix.
 
