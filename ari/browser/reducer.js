@@ -49,7 +49,7 @@ const OUTPUT_RESULTS_GOOGLE = 'OUTPUT_RESULTS_GOOGLE';
 
 export const addInputAction = input => ({
   type: ADD,
-  payload: [['me', input]]
+  payload: input
 })
 
 export const outputResultsActionCore = results => ({

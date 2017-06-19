@@ -33447,7 +33447,7 @@
 	var addInputAction = exports.addInputAction = function addInputAction(input) {
 	  return {
 	    type: ADD,
-	    payload: [['me', input]]
+	    payload: input
 	  };
 	};
 	
